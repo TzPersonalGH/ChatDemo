@@ -30,10 +30,10 @@ public class LoginActivity extends BaseActivity {
         return R.layout.activity_login;
     }
 
-    public void init() {
-        ButterKnife.bind(this);
+    @Override
+    protected void init() {
+        super.init();
     }
-
 
     @OnClick(R.id.new_user)
     public void onClick() {
