@@ -4,15 +4,22 @@ import android.content.Intent;
 import android.os.Handler;
 
 import com.example.administrator.loveclassdemo.MainActivity;
+import com.example.administrator.loveclassdemo.Presenter.Impl.SplashPresenterImpl;
+import com.example.administrator.loveclassdemo.Presenter.SplashPresenter;
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.view.SplashView;
 
 /**
  * Created by Tz on 2017/9/19.
  */
 
-public class SplashActivity extends BaseActivity {
+//此为MVP模式中的view
+public class SplashActivity extends BaseActivity implements SplashView {
     private Handler mHandler = new Handler();
     private static final int DELAY = 2000;
+
+    //持有一个Presenter层的应用，来调用P层的业务逻辑
+    private SplashPresenter mSplashPresenter;
 
     @Override
     public int getLayoutResId() {
@@ -21,15 +28,9 @@ public class SplashActivity extends BaseActivity {
 
     protected void init(){
         super.init();
-        //检查登录状态
-        if (checkLoginStatus()) {
-            //已经登录则跳转到主界面
-            navigateToMain();
-        } else {
-            //没有登录则延迟两秒，跳转到登录界面
-            navigateToLogin();
-        }
-
+        //初始化Presenter
+        mSplashPresenter = new SplashPresenterImpl(this);
+        mSplashPresenter.checkLoginStatus();
 
     }
 
@@ -47,10 +48,6 @@ public class SplashActivity extends BaseActivity {
         },DELAY);
     }
 
-    private boolean checkLoginStatus() {
-        return false;
-    }
-
     /**
      * 已登录，跳转到主界面
      */
@@ -61,4 +58,13 @@ public class SplashActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onLoggedIn() {
+        navigateToMain();
+    }
+
+    @Override
+    public void onNotLogin() {
+        navigateToLogin();
+    }
 }
