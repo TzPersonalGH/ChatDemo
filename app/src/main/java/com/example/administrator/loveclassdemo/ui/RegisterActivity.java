@@ -5,7 +5,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.administrator.loveclassdemo.Presenter.Impl.RegisterPresenterImpl;
+import com.example.administrator.loveclassdemo.Presenter.RegisterPresenter;
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.view.RegisterView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +20,9 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by Tz on 2017/9/25.
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements RegisterView{
+    private RegisterPresenter registerPresenter ;
+
     @BindView(R.id.user)
     EditText mUser;
     @BindView(R.id.password)
@@ -35,6 +40,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
+        registerPresenter = new RegisterPresenterImpl(this);
     }
 
     @OnClick(R.id.register)
@@ -48,18 +54,18 @@ public class RegisterActivity extends BaseActivity {
         String password = mPassword.getText().toString().trim();
         String confirmPassword = mConfirmPassword.getText().toString().trim();
 
-        BmobUser bmobUser = new BmobUser();
-        bmobUser.setUsername(userName);
-        bmobUser.setPassword(password);
-        bmobUser.signUp(new SaveListener<BmobUser>() {
-            @Override
-            public void done(BmobUser bmobUser, BmobException e) {
-                if (e == null) {
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-                } 
-            }
-        });
+        //调用Presenter来完成注册业务逻辑
+        registerPresenter.register(userName,password,confirmPassword);
+
+    }
+
+    @Override
+    public void onRegisterSuccess() {
+        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRegisterFailed() {
+        Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
     }
 }
