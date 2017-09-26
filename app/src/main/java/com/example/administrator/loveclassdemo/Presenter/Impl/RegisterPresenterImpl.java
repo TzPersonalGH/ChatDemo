@@ -1,11 +1,15 @@
 package com.example.administrator.loveclassdemo.Presenter.Impl;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.loveclassdemo.Presenter.RegisterPresenter;
 import com.example.administrator.loveclassdemo.ui.RegisterActivity;
 import com.example.administrator.loveclassdemo.utils.StringUtils;
+import com.example.administrator.loveclassdemo.utils.ThreadUtils;
 import com.example.administrator.loveclassdemo.view.RegisterView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -16,6 +20,8 @@ import cn.bmob.v3.listener.SaveListener;
  */
 
 public class RegisterPresenterImpl implements RegisterPresenter {
+    private static final String TAG ="RegisterPresenterImpl" ;
+
     private RegisterView mRegisterView;
 
     public RegisterPresenterImpl(RegisterView view) {
@@ -47,21 +53,72 @@ public class RegisterPresenterImpl implements RegisterPresenter {
         }
     }
 
-    private void registerBmob(String userName, String password) {
+    private void registerBmob(final String userName, final String password) {
         BmobUser bmobUser = new BmobUser();
         bmobUser.setUsername(userName);
         bmobUser.setPassword(password);
         bmobUser.signUp(new SaveListener<BmobUser>() {
+            /**
+             * 主线程回调
+             * @param bmobUser
+             * @param e
+             */
             @Override
             public void done(BmobUser bmobUser, BmobException e) {
+
                 if (e == null) {
                     //注册成功，通知View层成功
-                    mRegisterView.onRegisterSuccess();
+                    //mRegisterView.onRegisterSuccess();
+                    registerEaseMob(userName,password);
                 } else {
                     //注册失败，通知View层失败
-                    mRegisterView.onRegisterFailed();
+                    //mRegisterView.onRegisterFailed();
                 }
             }
         });
+    }
+
+    private void registerEaseMob(final String userName,final String password) {
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(userName,password);
+                    Log.d(TAG,"run:注册成功");
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    Log.d(TAG,"run:注册失败");
+                }
+            }
+        }).start();*/
+
+        ThreadUtils.runOnBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(userName,password);
+                    Log.d(TAG,"run:注册成功");
+                    //在主线程通知View注册成功
+                    ThreadUtils.runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mRegisterView.onRegisterSuccess();
+                        }
+                    });
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    Log.d(TAG,"run:注册失败");
+                    //在主线程通知View注册失败
+                    ThreadUtils.runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mRegisterView.onRegisterFailed();
+                        }
+                    });
+                }
+            }
+        });
+
+
     }
 }
