@@ -12,4 +12,9 @@ public interface RegisterView {
 
     void onRegisterFailed();
 
+    void onUserNameError();
+
+    void onPasswordError();
+
+    void onConfirmPasswordError();
 }

@@ -68,4 +68,19 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
     public void onRegisterFailed() {
         Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onUserNameError() {
+        mUser.setError(getString(R.string.user_name_error));
+    }
+
+    @Override
+    public void onPasswordError() {
+        mPassword.setError(getString(R.string.password_error));
+    }
+
+    @Override
+    public void onConfirmPasswordError() {
+        mConfirmPassword.setError(getString(R.string.confirm_password_error));
+    }
 }

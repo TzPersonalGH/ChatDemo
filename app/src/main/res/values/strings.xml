@@ -4,4 +4,7 @@
     <string name="user_password">密码</string>
     <string name="new_user">新用户</string>
     <string name="user_confirm_password">确认密码</string>
+    <string name="user_name_error">用户名出错，3到20位，首字符必须是字母</string>
+    <string name="password_error">密码出错，必须是3-20位数字</string>
+    <string name="confirm_password_error">两次密码不一致</string>
 </resources>
