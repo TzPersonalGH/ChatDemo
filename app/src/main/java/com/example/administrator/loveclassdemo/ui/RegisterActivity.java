@@ -43,6 +43,5 @@ public class RegisterActivity extends BaseActivity {
         String userName = mUser.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         String confirmPassword = mConfirmPassword.getText().toString().trim();
-
     }
 }
