@@ -41,9 +41,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                goTo(LoginActivity.class);
             }
         },DELAY);
     }
@@ -52,9 +50,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
      * 已登录，跳转到主界面
      */
     private void navigateToMain() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        goTo(MainActivity.class);
     }
 
 

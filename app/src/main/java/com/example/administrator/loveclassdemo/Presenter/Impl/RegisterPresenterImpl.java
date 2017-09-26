@@ -35,7 +35,9 @@ public class RegisterPresenterImpl implements RegisterPresenter {
             if (StringUtils.isValidPassword(password)) {
                 //密码合法则继续判断密码是否一致
                 if (password.equals(confirmPassword)) {
-                    //密码一致，则注册到Bmob
+                    //密码一致，则注册
+                    //通知View开始注册
+                    mRegisterView.onStartRegister();
                     registerBmob(userName, password);
                 } else {
                     //确认密码出错，通知View层

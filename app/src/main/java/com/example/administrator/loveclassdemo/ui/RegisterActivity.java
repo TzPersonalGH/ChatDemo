@@ -62,6 +62,10 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
     @Override
     public void onRegisterSuccess() {
         Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        //隐藏进度条
+        hideProgressDialog();
+        //注册成功，跳转到登录界面
+        goTo(LoginActivity.class);
     }
 
     @Override
@@ -82,5 +86,10 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
     @Override
     public void onConfirmPasswordError() {
         mConfirmPassword.setError(getString(R.string.confirm_password_error));
+    }
+
+    @Override
+    public void onStartRegister() {
+        showProgressDialog(getString(R.string.registering));
     }
 }

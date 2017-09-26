@@ -37,7 +37,6 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.new_user)
     public void onClick() {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        goTo(RegisterActivity.class);
     }
 }
