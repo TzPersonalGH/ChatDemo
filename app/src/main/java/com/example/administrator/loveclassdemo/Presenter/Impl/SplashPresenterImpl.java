@@ -2,6 +2,7 @@ package com.example.administrator.loveclassdemo.Presenter.Impl;
 
 import com.example.administrator.loveclassdemo.Presenter.SplashPresenter;
 import com.example.administrator.loveclassdemo.view.SplashView;
+import com.hyphenate.chat.EMClient;
 
 /**
  * Created by Tz on 2017/9/25.
@@ -31,7 +32,11 @@ public class SplashPresenterImpl implements SplashPresenter {
         }
     }
 
+    /**
+     * 判断是否登录
+     * @return
+     */
     public boolean isLoggedIn() {
-        return false;
+        return EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isConnected();
     }
 }
