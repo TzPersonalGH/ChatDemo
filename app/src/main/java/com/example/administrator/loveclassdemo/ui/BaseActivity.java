@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.inputmethod.InputMethodManager;
 
 import butterknife.ButterKnife;
 
@@ -39,12 +40,14 @@ public abstract class BaseActivity extends AppCompatActivity{
      */
     public abstract int getLayoutResId();
 
+    //打开某个活动
     public void goTo(Class activity) {
         Intent intent = new Intent(this, activity);
         startActivity(intent );
         finish();
     }
 
+    //显示加载进度条
     public void showProgressDialog(String msg) {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -53,8 +56,16 @@ public abstract class BaseActivity extends AppCompatActivity{
         mProgressDialog.show();
     }
 
+    //隐藏加载进度条
     public void hideProgressDialog() {
         mProgressDialog.hide();
+    }
+
+    //隐藏软件盘
+    public void hideKeyBoard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
     }
 
 }

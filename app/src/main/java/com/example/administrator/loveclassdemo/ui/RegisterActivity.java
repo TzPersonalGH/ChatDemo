@@ -54,6 +54,9 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
         String password = mPassword.getText().toString().trim();
         String confirmPassword = mConfirmPassword.getText().toString().trim();
 
+        //隐藏软键盘
+        hideKeyBoard();
+
         //调用Presenter来完成注册业务逻辑
         registerPresenter.register(userName,password,confirmPassword);
 
