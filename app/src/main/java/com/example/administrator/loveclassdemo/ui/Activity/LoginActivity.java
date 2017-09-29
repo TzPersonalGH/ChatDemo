@@ -1,4 +1,4 @@
-package com.example.administrator.loveclassdemo.ui;
+package com.example.administrator.loveclassdemo.ui.Activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.administrator.loveclassdemo.MainActivity;
 import com.example.administrator.loveclassdemo.R;
 import com.example.administrator.loveclassdemo.utils.ThreadUtils;
 import com.hyphenate.EMCallBack;

@@ -1,4 +1,4 @@
-package com.example.administrator.loveclassdemo.ui;
+package com.example.administrator.loveclassdemo.ui.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

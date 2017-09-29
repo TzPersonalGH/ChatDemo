@@ -1,6 +1,5 @@
-package com.example.administrator.loveclassdemo.ui;
+package com.example.administrator.loveclassdemo.ui.Activity;
 
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,11 +10,7 @@ import com.example.administrator.loveclassdemo.R;
 import com.example.administrator.loveclassdemo.view.RegisterView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by Tz on 2017/9/25.

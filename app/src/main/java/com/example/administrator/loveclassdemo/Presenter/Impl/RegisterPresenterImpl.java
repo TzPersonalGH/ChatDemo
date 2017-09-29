@@ -1,10 +1,8 @@
 package com.example.administrator.loveclassdemo.Presenter.Impl;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.administrator.loveclassdemo.Presenter.RegisterPresenter;
-import com.example.administrator.loveclassdemo.ui.RegisterActivity;
 import com.example.administrator.loveclassdemo.utils.StringUtils;
 import com.example.administrator.loveclassdemo.utils.ThreadUtils;
 import com.example.administrator.loveclassdemo.view.RegisterView;

@@ -1,9 +1,7 @@
-package com.example.administrator.loveclassdemo.ui;
+package com.example.administrator.loveclassdemo.ui.Activity;
 
-import android.content.Intent;
 import android.os.Handler;
 
-import com.example.administrator.loveclassdemo.MainActivity;
 import com.example.administrator.loveclassdemo.Presenter.Impl.SplashPresenterImpl;
 import com.example.administrator.loveclassdemo.Presenter.SplashPresenter;
 import com.example.administrator.loveclassdemo.R;
