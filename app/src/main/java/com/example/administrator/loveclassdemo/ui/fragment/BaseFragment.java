@@ -1,5 +1,6 @@
 package com.example.administrator.loveclassdemo.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,5 +37,11 @@ public abstract class BaseFragment extends Fragment {
      */
     public abstract int getLayoutResId();
 
+
+    public void goTo(Class activity) {
+        Intent intent = new Intent(getContext(), activity);
+        startActivity(intent );
+        getActivity().finish();
+    }
 
 }

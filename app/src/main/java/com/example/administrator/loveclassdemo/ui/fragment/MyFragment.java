@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.ui.Activity.LoginActivity;
+import com.example.administrator.loveclassdemo.utils.ThreadUtils;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
 import butterknife.BindView;
@@ -42,15 +45,31 @@ public class MyFragment extends BaseFragment {
         mLogout.setText(logout);
     }
 
-    @OnClick({R.id.back, R.id.add, R.id.logout})
+    @OnClick(R.id.logout)
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                break;
-            case R.id.add:
-                break;
-            case R.id.logout:
-                break;
+        EMClient.getInstance().logout(true, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                ThreadUtils.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        goTo(LoginActivity.class);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+
         }
-    }
+
 }

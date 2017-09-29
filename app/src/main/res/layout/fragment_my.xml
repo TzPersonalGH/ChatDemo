@@ -25,7 +25,7 @@
         android:text="@string/logout"
         android:layout_margin="10dp"
         android:background="@drawable/btn_logout_selector"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         />
 
 
