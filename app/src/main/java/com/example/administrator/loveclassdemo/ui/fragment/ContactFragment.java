@@ -50,7 +50,7 @@ public class ContactFragment extends BaseFragment implements ContactView{
     }
 
     private void initRecyclerView() {
-        mContectListAdapter = new ContactListAdapter(getContext());
+        mContectListAdapter = new ContactListAdapter(getContext(),mContactPresenter.getDataList());
         mRecyclerView.setHasFixedSize(true);//设置RecyclerView有固定的大小
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mContectListAdapter);
@@ -59,6 +59,8 @@ public class ContactFragment extends BaseFragment implements ContactView{
     @Override
     public void onLoadContactSuccess() {
         Toast.makeText(getContext(), getString(R.string.load_contacts_success), Toast.LENGTH_SHORT).show();
+        //刷新列表
+        mContectListAdapter.notifyDataSetChanged();
 
     }
 

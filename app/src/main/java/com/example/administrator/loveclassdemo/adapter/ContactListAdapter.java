@@ -5,17 +5,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.loveclassdemo.model.ContactListItem;
 import com.example.administrator.loveclassdemo.widget.ContactListItemView;
+
+import java.util.List;
 
 /**
  * Created by Tz on 2017/9/30.
  */
 
-public class ContactListAdapter extends RecyclerView.Adapter {
+public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ContactListItemViewHolder> {
     private Context mContext;
+    private List<ContactListItem> mContactListItem;
 
-    public ContactListAdapter(Context content) {
+    public ContactListAdapter(Context content, List<ContactListItem> listItem) {
         mContext = content;
+        mContactListItem = listItem;
     }
 
     /**
@@ -25,7 +30,7 @@ public class ContactListAdapter extends RecyclerView.Adapter {
      * @return
      */
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ContactListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ContactListItemViewHolder(new ContactListItemView(mContext));
     }
 
@@ -35,7 +40,8 @@ public class ContactListAdapter extends RecyclerView.Adapter {
      * @param position
      */
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(ContactListItemViewHolder holder, int position) {
+        holder.mContactListItemView.bindView(mContactListItem.get(position));
 
     }
 
@@ -45,7 +51,7 @@ public class ContactListAdapter extends RecyclerView.Adapter {
      */
     @Override
     public int getItemCount() {
-        return 30;
+        return mContactListItem.size();
     }
 
     public class ContactListItemViewHolder extends RecyclerView.ViewHolder {
