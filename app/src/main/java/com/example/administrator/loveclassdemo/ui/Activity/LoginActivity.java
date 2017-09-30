@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.loveclassdemo.R;
 import com.example.administrator.loveclassdemo.utils.ThreadUtils;
@@ -43,13 +44,6 @@ public class LoginActivity extends BaseActivity {
         super.init();
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.login, R.id.new_user})
     public void onClick(View view) {
@@ -94,6 +88,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void run() {
                         hideProgressDialog();
+                        Toast.makeText(LoginActivity.this, "用户名或密码不正确", Toast.LENGTH_SHORT).show();
                     }
                 });
 

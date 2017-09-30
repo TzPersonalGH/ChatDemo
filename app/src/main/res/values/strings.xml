@@ -11,4 +11,5 @@
     <string name="logining">正在登录...</string>
     <string name="logout">退%s出</string>
     <string name="my">我的</string>
+    <string name="contacts">联系人</string>
 </resources>

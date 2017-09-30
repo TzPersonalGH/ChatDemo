@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <include layout="@layout/title_bar"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="联系人"
+
         />
 
 </LinearLayout>
