@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.loveclassdemo.Presenter.ContactPresenter;
+import com.example.administrator.loveclassdemo.Presenter.Impl.ContactPresenterImpl;
 import com.example.administrator.loveclassdemo.R;
 import com.example.administrator.loveclassdemo.adapter.ContactListAdapter;
+import com.example.administrator.loveclassdemo.view.ContactView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by Tz on 2017/9/29.
  */
 
-public class ContactFragment extends BaseFragment {
+public class ContactFragment extends BaseFragment implements ContactView{
     @BindView(R.id.title)
     TextView mTitle;
     @BindView(R.id.add)
@@ -28,7 +31,7 @@ public class ContactFragment extends BaseFragment {
     RecyclerView mRecyclerView;
 
     private RecyclerView.Adapter mContectListAdapter;
-
+    private ContactPresenter mContactPresenter;
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_contact;
@@ -37,9 +40,12 @@ public class ContactFragment extends BaseFragment {
     @Override
     protected void init() {
         super.init();
+        mContactPresenter = new ContactPresenterImpl(this);
         mTitle.setText(R.string.contacts);
         mAdd.setVisibility(View.VISIBLE);
         initRecyclerView();
+
+        mContactPresenter.loadContact();
     }
 
     private void initRecyclerView() {
