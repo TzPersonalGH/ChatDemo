@@ -12,4 +12,6 @@
     <string name="logout">退%s出</string>
     <string name="my">我的</string>
     <string name="contacts">联系人</string>
+    <string name="load_contacts_success">加载联系人成功</string>
+    <string name="load_contacts_failed">加载联系人失败</string>
 </resources>

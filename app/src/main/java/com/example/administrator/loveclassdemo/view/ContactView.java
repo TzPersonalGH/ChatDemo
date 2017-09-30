@@ -5,4 +5,7 @@ package com.example.administrator.loveclassdemo.view;
  */
 
 public interface ContactView {
+    void onLoadContactSuccess();
+
+    void onLoadContactFailed();
 }

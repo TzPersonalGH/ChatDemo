@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.loveclassdemo.Presenter.ContactPresenter;
 import com.example.administrator.loveclassdemo.Presenter.Impl.ContactPresenterImpl;
@@ -53,5 +54,17 @@ public class ContactFragment extends BaseFragment implements ContactView{
         mRecyclerView.setHasFixedSize(true);//设置RecyclerView有固定的大小
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mContectListAdapter);
+    }
+
+    @Override
+    public void onLoadContactSuccess() {
+        Toast.makeText(getContext(), getString(R.string.load_contacts_success), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onLoadContactFailed() {
+        Toast.makeText(getContext(), getString(R.string.load_contacts_failed), Toast.LENGTH_SHORT).show();
+
     }
 }
