@@ -10,7 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.loveclassdemo.Presenter.ChatPresenter;
+import com.example.administrator.loveclassdemo.Presenter.Impl.ChatPresenterImpl;
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.view.ChatView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +22,9 @@ import butterknife.OnClick;
 /**
  * Created by Tz on 2017/10/13.
  */
-public class ChatActivity extends BaseActivity {
+public class ChatActivity extends BaseActivity implements ChatView{
     private String mContact;
+    private ChatPresenter mChatPresenter;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -41,6 +45,7 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
+        mChatPresenter = new ChatPresenterImpl(this);
         mBack.setVisibility(View.VISIBLE);
         mContact = getIntent().getStringExtra("contact");
         String title = String.format(getString(R.string.chat_title),mContact);
@@ -52,11 +57,20 @@ public class ChatActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.send:
+                sendMessage();
                 break;
             case R.id.back:
                 finish();
                 break;
         }
+    }
+
+    /**
+     * 调用Presenter来发送一条消息
+     */
+    private void sendMessage() {
+        String content = mMessage.getText().toString().trim();
+        mChatPresenter.sendMessage(content,mContact);
     }
 
     private TextWatcher mTextWatcher = new TextWatcher() {
