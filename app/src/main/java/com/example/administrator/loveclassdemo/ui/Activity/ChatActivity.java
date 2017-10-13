@@ -1,6 +1,7 @@
 package com.example.administrator.loveclassdemo.ui.Activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,6 +53,13 @@ public class ChatActivity extends BaseActivity implements ChatView{
         String title = String.format(getString(R.string.chat_title),mContact);
         mTitle.setText(title);
         mMessage.addTextChangedListener(mTextWatcher);//监听输入框的变化
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter();
     }
 
     @OnClick({R.id.send ,R.id.back})
