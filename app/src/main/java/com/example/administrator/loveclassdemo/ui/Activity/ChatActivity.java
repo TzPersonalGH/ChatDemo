@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.loveclassdemo.Presenter.ChatPresenter;
 import com.example.administrator.loveclassdemo.Presenter.Impl.ChatPresenterImpl;
@@ -92,4 +93,13 @@ public class ChatActivity extends BaseActivity implements ChatView{
         }
     };
 
+    @Override
+    public void onSendMessageSuccess() {
+        Toast.makeText(this, "发送消息成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSendMessageFailed() {
+        Toast.makeText(this, "发送消息失败", Toast.LENGTH_SHORT).show();
+    }
 }
