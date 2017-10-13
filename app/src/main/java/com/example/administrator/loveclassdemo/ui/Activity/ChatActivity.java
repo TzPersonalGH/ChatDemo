@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.administrator.loveclassdemo.Presenter.ChatPresenter;
 import com.example.administrator.loveclassdemo.Presenter.Impl.ChatPresenterImpl;
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.adapter.MessageListAdapter;
 import com.example.administrator.loveclassdemo.view.ChatView;
 
 import butterknife.BindView;
@@ -27,6 +28,7 @@ import butterknife.OnClick;
 public class ChatActivity extends BaseActivity implements ChatView{
     private String mContact;
     private ChatPresenter mChatPresenter;
+    private MessageListAdapter mMessageListAdapter;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -57,9 +59,10 @@ public class ChatActivity extends BaseActivity implements ChatView{
     }
 
     private void initRecyclerView() {
+        mMessageListAdapter = new MessageListAdapter(this, mChatPresenter.getMessageList());
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter();
+        mRecyclerView.setAdapter(mMessageListAdapter);
     }
 
     @OnClick({R.id.send ,R.id.back})
@@ -78,6 +81,7 @@ public class ChatActivity extends BaseActivity implements ChatView{
      * 调用Presenter来发送一条消息
      */
     private void sendMessage() {
+        hideKeyBoard();
         String content = mMessage.getText().toString().trim();
         mChatPresenter.sendMessage(content,mContact);
     }
@@ -109,5 +113,12 @@ public class ChatActivity extends BaseActivity implements ChatView{
     @Override
     public void onSendMessageFailed() {
         Toast.makeText(this, "发送消息失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStartSendMessage() {
+        mMessageListAdapter.notifyDataSetChanged();
+        //滚动RecyclerView到底部
+        mRecyclerView.smoothScrollToPosition(mChatPresenter.getMessageList().size()-1);
     }
 }

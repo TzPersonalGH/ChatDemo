@@ -8,4 +8,6 @@ public interface ChatView {
     void onSendMessageSuccess();
 
     void onSendMessageFailed();
+
+    void onStartSendMessage();
 }
