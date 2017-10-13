@@ -8,6 +8,8 @@ public class ContactListItem {
     public String url; //头像url
     public String contact; //联系人
 
+    public boolean showFirstLetter = true;
+
     public String getFirstLetter() {
         return String.valueOf(contact.charAt(0)).toUpperCase();
     }

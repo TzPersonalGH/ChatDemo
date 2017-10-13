@@ -1,11 +1,13 @@
 package com.example.administrator.loveclassdemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.loveclassdemo.model.ContactListItem;
+import com.example.administrator.loveclassdemo.ui.Activity.ChatActivity;
 import com.example.administrator.loveclassdemo.widget.ContactListItemView;
 
 import java.util.List;
@@ -40,8 +42,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
      * @param position
      */
     @Override
-    public void onBindViewHolder(ContactListItemViewHolder holder, int position) {
+    public void onBindViewHolder(ContactListItemViewHolder holder, final int position) {
         holder.mContactListItemView.bindView(mContactListItem.get(position));
+        holder.mContactListItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,ChatActivity.class);
+                intent.putExtra("contact", mContactListItem.get(position).contact);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

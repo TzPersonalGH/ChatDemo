@@ -41,6 +41,11 @@ public class ContactListItemView extends RelativeLayout {
 
     public void bindView(ContactListItem contactListItem) {
         mContact.setText(contactListItem.contact);
-        mFirstLetter.setText(contactListItem.getFirstLetter());
+        if (contactListItem.showFirstLetter) {
+            mFirstLetter.setVisibility(VISIBLE);
+            mFirstLetter.setText(contactListItem.getFirstLetter());
+        } else {
+            mFirstLetter.setVisibility(GONE);
+        }
     }
 }

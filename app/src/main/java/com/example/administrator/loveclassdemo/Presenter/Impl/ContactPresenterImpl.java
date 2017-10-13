@@ -31,11 +31,12 @@ public class ContactPresenterImpl implements ContactPresenter{
             @Override
             public void run() {
                 try {
-                    //同步方法，去子线程
+                    //同步方法，去子线程执行
                     List<String> username = EMClient.getInstance().contactManager().getAllContactsFromServer();
                     for (int i =0; i<username.size(); i++) {
                         ContactListItem item = new ContactListItem();
                         item.contact = username.get(i);
+                        //创建ContactListItem添加到数据集合
                         mContactListItems.add(item);
                     }
 
@@ -45,6 +46,14 @@ public class ContactPresenterImpl implements ContactPresenter{
                             return o1.contact.charAt(0)-o2.contact.charAt(0);
                         }
                     });
+
+                    //判断后一个item跟前一个item的首字符是否一致，如果一致，则不显示首字符
+                    for (int i = 0; i < mContactListItems.size();i++) {
+                        ContactListItem item = mContactListItems.get(i);
+                        if (i > 0 && item.getFirstLetter().equals(mContactListItems.get(i - 1).getFirstLetter())) {
+                            item.showFirstLetter = false;
+                        }
+                    }
 
                     //没有异常，通知View层加载联系人数据成功
                     ThreadUtils.runOnMainThread(new Runnable() {

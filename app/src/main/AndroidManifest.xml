@@ -66,6 +66,8 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".ui.Activity.ChatActivity"/>
+
     </application>
 
 </manifest>
