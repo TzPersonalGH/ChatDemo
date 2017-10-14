@@ -38,7 +38,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        if (holder instanceof SendMessageListItemViewHolder) {
+            ((SendMessageListItemViewHolder) holder).mSendMessageItemView.bindView(mEMMessages.get(position));
+        }
     }
 
     @Override

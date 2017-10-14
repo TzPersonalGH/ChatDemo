@@ -16,4 +16,5 @@
     <string name="load_contacts_failed">加载联系人失败</string>
     <string name="send">发送</string>
     <string name="chat_title">与%s聊天中</string>
+    <string name="no_text_message">非文本消息</string>
 </resources>

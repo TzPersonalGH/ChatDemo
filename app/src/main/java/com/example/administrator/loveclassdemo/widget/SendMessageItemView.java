@@ -4,16 +4,31 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.administrator.loveclassdemo.R;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessageBody;
+import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.util.DateUtils;
+
+import java.util.Date;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Tz on 2017/10/13.
  */
 
 public class SendMessageItemView extends RelativeLayout {
+    @BindView(R.id.timestamp)
+    TextView mTimestamp;
+    @BindView(R.id.content)
+    TextView mContent;
+
     public SendMessageItemView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public SendMessageItemView(Context context, AttributeSet attrs) {
@@ -23,5 +38,18 @@ public class SendMessageItemView extends RelativeLayout {
 
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_send_message, this);
+        ButterKnife.bind(this, this);
+    }
+
+    public void bindView(EMMessage emMessage) {
+        long msgTime = emMessage.getMsgTime();
+        mTimestamp.setText(DateUtils.getTimestampString(new Date(msgTime)));
+        EMMessageBody body = emMessage.getBody();
+        if (body instanceof EMTextMessageBody) {
+            mContent.setText(((EMTextMessageBody) body).getMessage());
+        } else {
+            mContent.setText(R.string.no_text_message);
+        }
+
     }
 }
