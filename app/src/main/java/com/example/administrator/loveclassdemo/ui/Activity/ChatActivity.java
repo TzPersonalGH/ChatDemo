@@ -16,7 +16,13 @@ import com.example.administrator.loveclassdemo.Presenter.ChatPresenter;
 import com.example.administrator.loveclassdemo.Presenter.Impl.ChatPresenterImpl;
 import com.example.administrator.loveclassdemo.R;
 import com.example.administrator.loveclassdemo.adapter.MessageListAdapter;
+import com.example.administrator.loveclassdemo.utils.ThreadUtils;
 import com.example.administrator.loveclassdemo.view.ChatView;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +62,7 @@ public class ChatActivity extends BaseActivity implements ChatView{
         mTitle.setText(title);
         mMessage.addTextChangedListener(mTextWatcher);//监听输入框的变化
         initRecyclerView();
+        EMClient.getInstance().chatManager().addMessageListener(mEMMessageListener);
     }
 
     private void initRecyclerView() {
@@ -121,4 +128,44 @@ public class ChatActivity extends BaseActivity implements ChatView{
         //滚动RecyclerView到底部
         mRecyclerView.smoothScrollToPosition(mChatPresenter.getMessageList().size()-1);
     }
+
+    private EMMessageListener mEMMessageListener = new EMMessageListener() {
+        /**
+         * 在子线程回调
+         * @param list
+         */
+        @Override
+        public void onMessageReceived(final List<EMMessage> list) {
+            //在主线程刷新列表
+            ThreadUtils.runOnMainThread(new Runnable() {
+                @Override
+                public void run() {
+                    mMessageListAdapter.addMessage(list.get(0));
+                    mRecyclerView.smoothScrollToPosition(mChatPresenter.getMessageList().size()-1);
+                }
+            });
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageReadAckReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageDeliveryAckReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage emMessage, Object o) {
+
+        }
+    };
+
+
 }

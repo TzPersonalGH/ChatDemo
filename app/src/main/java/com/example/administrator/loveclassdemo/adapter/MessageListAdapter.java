@@ -40,6 +40,8 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof SendMessageListItemViewHolder) {
             ((SendMessageListItemViewHolder) holder).mSendMessageItemView.bindView(mEMMessages.get(position));
+        } else if (holder instanceof ReceiveMessageListItemViewHolder) {
+            ((ReceiveMessageListItemViewHolder) holder).mReceiveMessageItemView.bindView(mEMMessages.get(position));
         }
     }
 
@@ -58,6 +60,11 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         EMMessage emMessage = mEMMessages.get(position);
         return emMessage.direct() == EMMessage.Direct.SEND ? ITEM_TYPE_SEND : ITEM_TYPE_RECEIVER;
+    }
+
+    public void addMessage(EMMessage emMessage) {
+        mEMMessages.add(emMessage);
+        notifyDataSetChanged();
     }
 
     public class SendMessageListItemViewHolder extends RecyclerView.ViewHolder {

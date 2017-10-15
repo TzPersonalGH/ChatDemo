@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/avatar"
+            android:gravity="center"
             android:background="@drawable/send_msg_normal"/>
 
     </RelativeLayout>
