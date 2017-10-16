@@ -13,6 +13,12 @@
         />
 
     <tab
+        icon="@drawable/ic_contact_selected_2"
+        id="@+id/tab_class"
+        title="班级"
+        />
+
+    <tab
         icon="@drawable/ic_plugin_selected_2"
         id="@+id/tab_my"
         title="我的"

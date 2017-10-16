@@ -3,6 +3,7 @@ package com.example.administrator.loveclassdemo.factory;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.ui.fragment.ClassFragment;
 import com.example.administrator.loveclassdemo.ui.fragment.ContactFragment;
 import com.example.administrator.loveclassdemo.ui.fragment.ConversationFragment;
 import com.example.administrator.loveclassdemo.ui.fragment.MyFragment;
@@ -16,6 +17,7 @@ public class FragmentFactory {
     private Fragment mContactFragment;
     private Fragment mMyFragment;
     private Fragment mConversationFragment;
+    private Fragment mClassFragment;
 
     private FragmentFactory() {}
 
@@ -43,6 +45,8 @@ public class FragmentFactory {
                 return getConversationFragment();
             case R.id.tab_contacts:
                 return getContactFragment();
+            case R.id.tab_class:
+                return getClassFragment();
             case R.id.tab_my:
                 return getMyFragment();
         }
@@ -61,6 +65,13 @@ public class FragmentFactory {
             mContactFragment = new ContactFragment();
         }
         return mContactFragment;
+    }
+
+    public Fragment getClassFragment() {
+        if (mClassFragment == null) {
+            mClassFragment = new ClassFragment();
+        }
+        return mClassFragment;
     }
 
     public Fragment getMyFragment() {

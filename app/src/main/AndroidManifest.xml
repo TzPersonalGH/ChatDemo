@@ -67,6 +67,7 @@
         </receiver>
 
         <activity android:name=".ui.Activity.ChatActivity"/>
+        <activity android:name=".ui.Activity.CreateClassActivity"/>
 
     </application>
 

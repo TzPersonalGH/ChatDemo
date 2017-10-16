@@ -38,10 +38,12 @@ public class ChatPresenterImpl implements ChatPresenter {
                     @Override
                     public void run() {
                         mChatView.onStartSendMessage();
+                        mChatView.hideEditTextContent();
                     }
                 });
                 //发送消息
                 EMClient.getInstance().chatManager().sendMessage(message);
+
             }
         });
     }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.loveclassdemo.R;
+import com.example.administrator.loveclassdemo.ui.Activity.CreateClassActivity;
 import com.example.administrator.loveclassdemo.ui.Activity.LoginActivity;
 import com.example.administrator.loveclassdemo.utils.ThreadUtils;
 import com.hyphenate.EMCallBack;
@@ -31,6 +32,8 @@ public class MyFragment extends BaseFragment {
     ImageView mAdd;
     @BindView(R.id.logout)
     Button mLogout;
+    @BindView(R.id.create_class)
+    TextView mCreateClass;
 
     @Override
     public int getLayoutResId() {
@@ -70,6 +73,10 @@ public class MyFragment extends BaseFragment {
             }
         });
 
-        }
+    }
 
+    @OnClick(R.id.create_class)
+    public void onClick() {
+        goTo(CreateClassActivity.class);
+    }
 }

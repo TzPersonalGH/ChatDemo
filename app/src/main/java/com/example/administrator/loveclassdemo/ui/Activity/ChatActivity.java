@@ -129,6 +129,11 @@ public class ChatActivity extends BaseActivity implements ChatView{
         mRecyclerView.smoothScrollToPosition(mChatPresenter.getMessageList().size()-1);
     }
 
+    @Override
+    public void hideEditTextContent() {
+        mMessage.setText("");
+    }
+
     private EMMessageListener mEMMessageListener = new EMMessageListener() {
         /**
          * 在子线程回调

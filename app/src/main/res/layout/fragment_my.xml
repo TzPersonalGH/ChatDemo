@@ -16,6 +16,15 @@
         android:src="@drawable/avatar_10"
         />
 
+    <TextView
+        android:id="@+id/create_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_class"
+        android:textSize="26dp"
+        android:layout_margin="10dp"
+        />
+
     <Button
         android:id="@+id/logout"
         android:layout_width="match_parent"
@@ -26,6 +35,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/btn_logout_selector"
         android:textAllCaps="true"
+
         />
 
 

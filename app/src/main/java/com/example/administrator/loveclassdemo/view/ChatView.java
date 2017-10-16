@@ -10,4 +10,6 @@ public interface ChatView {
     void onSendMessageFailed();
 
     void onStartSendMessage();
+
+    void hideEditTextContent();
 }

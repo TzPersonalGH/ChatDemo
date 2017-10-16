@@ -17,4 +17,6 @@
     <string name="send">发送</string>
     <string name="chat_title">与%s聊天中</string>
     <string name="no_text_message">非文本消息</string>
+    <string name="create_class">创建班级</string>
+    <string name="creating">正在创建...</string>
 </resources>
