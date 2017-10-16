@@ -5,33 +5,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.loveclassdemo.model.ClassListItem;
 import com.example.administrator.loveclassdemo.widget.ClassListItemView;
+
+import java.util.List;
 
 
 /**
  * Created by Tz on 2017/10/16.
  */
 
-public class ClassListAdapter extends RecyclerView.Adapter{
+public class ClassListAdapter extends RecyclerView.Adapter<ClassListAdapter.ClassListItemViewHolder>{
     private Context mContext;
-    public ClassListAdapter(Context context) {
+    private List<ClassListItem> mClassListItems;
+    public ClassListAdapter(Context context, List<ClassListItem> listItems) {
         mContext = context;
+        mClassListItems = listItems;
     }
 
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ClassListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ClassListItemViewHolder(new ClassListItemView(mContext));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(ClassListItemViewHolder holder, int position) {
+        holder.mClassListItemView.bindView(mClassListItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 30;
+        return mClassListItems.size();
     }
 
     public class ClassListItemViewHolder extends RecyclerView.ViewHolder {

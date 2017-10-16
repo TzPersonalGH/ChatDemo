@@ -1,12 +1,14 @@
 package com.example.administrator.loveclassdemo.Presenter.Impl;
 
 import com.example.administrator.loveclassdemo.Presenter.ClassPresenter;
+import com.example.administrator.loveclassdemo.model.ClassListItem;
 import com.example.administrator.loveclassdemo.utils.ThreadUtils;
 import com.example.administrator.loveclassdemo.view.ClassView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.exceptions.HyphenateException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +17,11 @@ import java.util.List;
 
 public class ClassPresenterImpl implements ClassPresenter {
     private ClassView mClassView;
+    private List<ClassListItem> mClassListItems;
 
     public ClassPresenterImpl(ClassView classView) {
         mClassView = classView;
+        mClassListItems = new ArrayList<ClassListItem>();
     }
 
     @Override
@@ -36,6 +40,11 @@ public class ClassPresenterImpl implements ClassPresenter {
                 try {
                     List<EMGroup> grouplist = EMClient.getInstance().groupManager().getJoinedGroupsFromServer();//需异步处理
                     //没有异常，则加载群组成功，通知View层
+                    for (int i = 0; i<grouplist.size(); i++) {
+                        ClassListItem item = new ClassListItem();
+                        item.className = String.valueOf(grouplist.get(i));
+                        mClassListItems.add(item);
+                    }
                     ThreadUtils.runOnMainThread(new Runnable() {
                         @Override
                         public void run() {
@@ -54,5 +63,10 @@ public class ClassPresenterImpl implements ClassPresenter {
                 }
             }
         });
+    }
+
+    @Override
+    public List<ClassListItem> getDataList() {
+        return mClassListItems;
     }
 }

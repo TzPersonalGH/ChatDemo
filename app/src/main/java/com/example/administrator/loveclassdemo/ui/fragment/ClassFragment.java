@@ -49,7 +49,7 @@ public class ClassFragment extends BaseFragment implements ClassView {
     }
 
     private void initRecyclerView() {
-        mClassListAdapter = new ClassListAdapter(getContext());
+        mClassListAdapter = new ClassListAdapter(getContext(),mClassPresenter.getDataList());
         mRecyclerView.setHasFixedSize(true);//设置其有固定大小
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mClassListAdapter);
@@ -59,6 +59,7 @@ public class ClassFragment extends BaseFragment implements ClassView {
     @Override
     public void onLoadClassSuccess() {
         Toast.makeText(getContext(), "加载群组成功", Toast.LENGTH_SHORT).show();
+        mClassListAdapter.notifyDataSetChanged();
     }
 
     @Override
