@@ -19,4 +19,5 @@
     <string name="no_text_message">非文本消息</string>
     <string name="create_class">创建班级</string>
     <string name="creating">正在创建...</string>
+    <string name="Class">我的班级</string>
 </resources>
