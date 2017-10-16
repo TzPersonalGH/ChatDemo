@@ -6,4 +6,7 @@ package com.example.administrator.loveclassdemo.view;
 
 public interface ClassView {
 
+    void onLoadClassSuccess();
+
+    void onLoadClassFailed();
 }

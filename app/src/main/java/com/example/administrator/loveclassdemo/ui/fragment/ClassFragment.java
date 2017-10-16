@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.loveclassdemo.Presenter.ClassPresenter;
 import com.example.administrator.loveclassdemo.Presenter.Impl.ClassPresenterImpl;
@@ -55,4 +56,13 @@ public class ClassFragment extends BaseFragment implements ClassView {
 
     }
 
+    @Override
+    public void onLoadClassSuccess() {
+        Toast.makeText(getContext(), "加载群组成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoadClassFailed() {
+        Toast.makeText(getContext(), "加载群组失败", Toast.LENGTH_SHORT).show();
+    }
 }
